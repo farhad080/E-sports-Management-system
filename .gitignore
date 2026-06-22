@@ -1,0 +1,7 @@
+/middlewares
+/node_modules
+/package-lock.json
+/package.json
+/public
+/routes
+/views
