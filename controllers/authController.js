@@ -37,12 +37,16 @@ exports.postLogin = async (req, res) => {
     if (email === 'admin@nexus.com' && password === 'admin123' && role === 'Admin') {
       req.session.user = { name: 'System Admin', email, role };
       req.session.success_msg = 'Successfully logged in as Administrator!';
-      return res.redirect('/');
+      return res.redirect('/admin/dashboard');
     }
     
     // Otherwise simulate standard login success for testing
     req.session.user = { name: 'Player Elite', email, role };
     req.session.success_msg = `Welcome back! Logged in as ${role}`;
+    
+    if (role === 'Admin') {
+      return res.redirect('/admin/dashboard');
+    }
     return res.redirect('/');
   } catch (err) {
     console.error(err);
