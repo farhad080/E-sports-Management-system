@@ -40,12 +40,23 @@ exports.postLogin = async (req, res) => {
       return res.redirect('/admin/dashboard');
     }
     
+    // Set mock user details based on role for richer dashboard presentation
+    let name = 'Player Elite';
+    if (role === 'Team Captain') name = 'Captain Phantom';
+    if (role === 'Player') name = 'ViperX';
+
     // Otherwise simulate standard login success for testing
-    req.session.user = { name: 'Player Elite', email, role };
+    req.session.user = { name, email, role };
     req.session.success_msg = `Welcome back! Logged in as ${role}`;
     
     if (role === 'Admin') {
       return res.redirect('/admin/dashboard');
+    }
+    if (role === 'Team Captain') {
+      return res.redirect('/captain/dashboard');
+    }
+    if (role === 'Player') {
+      return res.redirect('/player/dashboard');
     }
     return res.redirect('/');
   } catch (err) {
