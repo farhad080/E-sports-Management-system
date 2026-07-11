@@ -7,6 +7,10 @@ require('dotenv').config();
 const db = require('./db/connection');
 const routes = require('./routes/index');
 const authRoutes = require('./routes/auth');
+const tournamentRoutes = require('./routes/tournamentRoutes');
+const teamRoutes = require('./routes/teamRoutes');
+const matchRoutes = require('./routes/matchRoutes');
+const bracketRoutes = require('./routes/bracketRoutes');
 const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
@@ -92,6 +96,10 @@ app.use((req, res, next) => {
 // App Routes
 app.use('/', routes);
 app.use('/', authRoutes);
+app.use('/api/tournaments', tournamentRoutes);
+app.use('/api/teams', teamRoutes);
+app.use('/api/matches', matchRoutes);
+app.use('/api/brackets', bracketRoutes);
 
 // Error Handling Middleware
 app.use(errorHandler);
